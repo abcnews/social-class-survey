@@ -1,20 +1,15 @@
-import acto from '@abcnews/alternating-case-to-object';
 import { whenOdysseyLoaded } from '@abcnews/env-utils';
-import { getMountValue, selectMounts } from '@abcnews/mount-utils';
-import type { Mount } from '@abcnews/mount-utils';
+import { selectMounts } from '@abcnews/mount-utils';
 import App from './components/App/App.svelte';
 
-let appMountEl: Mount;
-let appProps;
-
 whenOdysseyLoaded.then(() => {
-  [appMountEl] = selectMounts('socialclasssurvey');
+  const [mountEl] = selectMounts('survey');
 
-  if (appMountEl) {
-    appProps = acto(getMountValue(appMountEl));
+  if (mountEl) {
+    mountEl.classList.add('u-pull');
     new App({
-      target: appMountEl,
-      props: appProps
+      target: mountEl,
+      props: {}
     });
   }
 });
